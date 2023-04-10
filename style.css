@@ -1,0 +1,54 @@
+ /* set margin and padding to 0 for the body element */
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* style the navbar */
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+  }
+  
+  /* style the navbar brand */
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* style the navbar links */
+  .navbar-nav li {
+    margin: 0 10px;
+  }
+  
+  /* style the form input and button */
+  .form-control {
+    width: 200px;
+    margin-right: 10px;
+  }
+  
+  .btn {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  /* style the form labels */
+  .form-label {
+    display: inline-block;
+    width: 100px;
+    margin-right: 20px;
+  }
+  
+  /* style the section with the form */
+  section {
+    margin-top: 20px;
+  }
+  
+  /* style the submit button in the form */
+  button[type="submit"] {
+    margin-top: 10px;
+  }
+  .btn btn-primary{
+    background-color: red;
+  }

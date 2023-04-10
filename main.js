@@ -1,0 +1,197 @@
+
+function renderListings(listing){
+   
+    const li=document.createElement("li")
+    
+    
+    li.innerHTML=`
+    <div class="card" style="width: 18rem;">
+  <img src='${listing.image}'class="card-img-top" >
+  <div class="card-body">
+    <h5 class="card-title">'${listing.description}'Card title</h5>
+    <h5 class="card-title">'${listing.price}'Card title</h5>
+    <p class="card-text">'${listing.city}'</p>
+    <button id='button' href="" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i>Go somewhere</button>
+    <button  id='delete' href="" class="btn btn-primary"><i class="fa fa-trash" aria-hidden="true"></i>delete</button>
+    
+  </div>
+</div>
+        
+        
+    `;
+    li.querySelector('#delete').addEventListener('click', ()=>{li.remove() 
+        deleteListings()
+    })
+    li.addEventListener("click", () => {
+        li.innerHTML = `
+          
+          <div class="card-body"style="width: 18rem;">
+          <img src="${listing.image}" class="card-img-top" alt="${listing.price}">
+            <h5 class="card-title">${listing.description}</h5>
+            <p class="card-text"id="price">Ksh ${listing.price}</p>
+            <p class="card-text">${listing.city}</p>
+            <h5 class="card-brand">Country of origin: ${listing.address}</h5>
+            <h5 class="card-brand">Type: ${listing.state}</h5>
+            <p class="card-text"> Available quantity is ${listing.zip}</p>
+            <button  id='edit' href="" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
+            
+          </div>
+        `
+        document.querySelector('#edit').addEventListener('click',() => {
+            let price=document.querySelector('#price')
+            price.innerHTML=listing.price-=1000
+        })
+      })
+      
+
+    document.querySelector("#lists").append(li);
+}
+
+
+function fetchListings(){
+    fetch("http://localhost:3000/listings")
+    .then(response=>response.json())
+    .then(listings => listings.forEach((listing) => {
+        renderListings(listing)
+    }))
+    .catch(error=>console.error(error))
+}
+
+function buyResidence(event){
+    const id=event.target.dataset.id;
+    const selectedListing = document.querySelector(`[data-id='${id}']`).closest('li');
+
+    // Create a new li element with the listing details
+    const favoriteLi = document.createElement('li');
+    favoriteLi.innerHTML = `
+        <img src=${selectedListing.querySelector('img').getAttribute('src')} alt=${selectedListing.querySelector('img').getAttribute('alt')}>
+        <h3>${selectedListing.querySelector('h3').textContent}</h3>
+        <button data-id=${id} class="remove-btn">Remove from Buy Residence</button>
+    `;
+
+    // Add event listener for removing a listing from the favorites list
+    buyLi.querySelector('button').addEventListener('click', buyResidence);
+
+    // Append the li element to the favorites list
+    document.querySelector('#favorites').append(favoriteLi);
+}
+function createListing(listing){
+    fetch("http://localhost:3000/listings", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(listing)
+    })
+    .then(listing => {
+        renderListings(listing);
+        document.querySelector("#create-listing-form").reset(); // Clear the form fields
+        const successMessage = document.createElement("p");
+        successMessage.textContent = "Listing created successfully!";
+        document.querySelector("#create-listing-form").insertAdjacentElement("afterend", successMessage);
+        setTimeout(() => successMessage.remove(), 3000); // Remove the success message after 3 seconds
+    })
+    .catch(error=>console.error(error))
+}
+
+function updateListing(id, listing){
+    fetch(`http://localhost:3000/listings/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(listing)
+    })
+    function updateListing(id, listing){
+        fetch(`http://localhost:3000/listings/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(listing)
+        })
+        .then(response=>response.json())
+        .then(updatedListing => {
+            // Update the UI to display the updated listing information
+            const li = document.querySelector(`li[data-id="${updatedListing.id}"]`);
+            li.querySelector("img").src = updatedListing.image;
+            li.querySelector("img").alt = updatedListing.price;
+            li.querySelector("h3").textContent = updatedListing.description;
+    
+            // Perform additional actions after updating the listing
+        })
+        .catch(error=>console.error(error))
+    }
+    
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchListings();
+
+   
+    // Add event listener for deleting a listing
+    document.querySelector("#lists").addEventListener("click", event => {
+        if (event.target.matches("button")) {
+            const id = event.target.dataset.id;
+            deleteListing(id);
+        }
+    });
+});
+// function to collect data
+let formData;
+
+function collectFormData() {
+  let form = document.querySelector("#form")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    formData = {
+      image: e.target.image.value,
+      name: e.target.description.value,
+      price: e.target.price.value,
+      description: e.target.city.value,
+      address: e.target.address.value,
+      zip: e.target.zip.value,
+
+    }
+    postData()
+  })
+}
+collectFormData()
+
+// POST to database
+function postData() {
+  fetch("http://localhost:3000/listings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(res => res.json())
+  .then(products => console.log(products))
+}
+// Function to delete product
+function deleteListings(id) {
+    fetch(`http://localhost:3000/listings/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+      
+  }
+  function editListings(id) {
+    fetch(`http://localhost:3000/listings/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+      
+  }
+  

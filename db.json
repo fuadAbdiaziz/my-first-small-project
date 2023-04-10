@@ -1,0 +1,101 @@
+{
+  "listings": [
+    {
+      "id": 1,
+      "address": "123 Main Street",
+      "city": "Mombasa",
+      "state": "Mambrui",
+      "zip": "12745",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "price": 500000,
+      "description": "Beautiful 3 bedroom, 2 bathroom home in a great neighborhood.",
+      "image": "https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fe6c79c03-d023-47fc-9422-7d487eb7e1ec.png?source=next-opengraph&fit=scale-down&width=900"
+    },
+    {
+      "id": 2,
+      "address": "456 Elm Street",
+      "city": "Abu Dhabi",
+      "state": "Al hilal",
+      "zip": "12445",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "price": 750000,
+      "description": "Spacious 4 bedroom, 3 bathroom home with a large backyard.",
+      "image": "https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fsir.azureedge.net%2F1253i215%2Fhtvkk44xmmn545tg3baxej8vs5i215&option=N&h=472&permitphotoenlargement=false"
+    },
+    {
+      "id": 3,
+      "address": "789 Oak Street",
+      "city": "Moscow",
+      "state": "klevski",
+      "zip": "11345",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "price": 350000,
+      "description": "Cozy 2 bedroom, 1 bathroom home with a fireplace.",
+      "image": "https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fsir.azureedge.net%2F1253i215%2F6k20va48g62c4q23hgx34pm8e6i215&option=N&h=472&permitphotoenlargement=false"
+    },
+    {
+      "id": 4,
+      "address": "1011 Pine Street",
+      "city": "Kyoto",
+      "state": "Onagashima",
+      "zip": "12245",
+      "bedrooms": 5,
+      "bathrooms": 4,
+      "price": 1000000,
+      "description": "Stunning 5 bedroom, 4 bathroom home with a pool and a view.",
+      "image": "https://cdn.trendhunterstatic.com/thumbs/315/los-angeles-house.jpeg?auto=webp"
+    },
+    {
+      "image": "https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fsir.azureedge.net%2F1253i215%2F6k20va48g62c4q23hgx34pm8e6i215&option=N&h=472&permitphotoenlargement=false",
+      "name": "Cozy 2 bedroom, 1 bathroom home with a fireplace",
+      "price": "350000",
+      "description": "Moscow",
+      "origin": "789 Oak Street",
+      "brand": "11345",
+      "id": 5
+    },
+    {
+      "image": "https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fsir.azureedge.net%2F1253i215%2F6k20va48g62c4q23hgx34pm8e6i215&option=N&h=472&permitphotoenlargement=false",
+      "name": "Cozy 2 bedroom, 1 bathroom home with a fireplace",
+      "price": "350000",
+      "description": "Moscow",
+      "origin": "789 Oak Street",
+      "brand": "11345",
+      "id": 6
+    }
+  ],
+  "favorites": [
+    {
+      "id": 1,
+      "listing_id": 2,
+      "user_id": 1
+    },
+    {
+      "id": 2,
+      "listing_id": 3,
+      "user_id": 2
+    },
+    {
+      "id": 3,
+      "listing_id": 4,
+      "user_id": 1
+    }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "message": "I'm interested in scheduling a viewing of the home at 123 Main Street."
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "message": "I'm interested in learning more about the home at 456 Elm Street."
+    }
+  ]
+}
