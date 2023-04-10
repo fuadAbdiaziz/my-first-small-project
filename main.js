@@ -1,7 +1,8 @@
 
 function renderListings(listing) {
-    const li = document.createElement("li");
-    li.innerHTML = `
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `
       <div class="card" style="width: 18rem;">
         <img src="${listing.image}" class="card-img-top">
         <div class="card-body">
@@ -13,12 +14,12 @@ function renderListings(listing) {
         </div>
       </div>
     `;
-    li.querySelector("#delete").addEventListener("click", () => {
-      li.remove();
+    card.querySelector("#delete").addEventListener("click", () => {
+      card.remove();
       deleteListings()
     });
-    li.querySelector("#button").addEventListener("click", () => {
-      li.innerHTML = `
+    card.querySelector("#button").addEventListener("click", () => {
+      card.innerHTML = `
         <div class="card-body" style="width: 18rem;">
           <img src="${listing.image}" class="card-img-top">
           <h5 class="card-title">${listing.description}</h5>
@@ -31,12 +32,12 @@ function renderListings(listing) {
           <button id="buy" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i>Buy Residence</button>
         </div>
       `;
-      li.querySelector("#edit").addEventListener("click", () => {
+      card.querySelector("#edit").addEventListener("click", () => {
         listing.price -= 1000;
-        li.querySelector(".card-title").textContent = listing.description;
-        li.querySelector(".card-text").textContent = `Ksh ${listing.price}`;
+        card.querySelector(".card-title").textContent = listing.description;
+        card.querySelector(".card-text").textContent = `Ksh ${listing.price}`;
       });
-      li.querySelector("#buy").addEventListener("click", () => {
+      card.querySelector("#buy").addEventListener("click", () => {
         const selectedListing = {
           image: listing.image,
           description: listing.description,
@@ -47,6 +48,7 @@ function renderListings(listing) {
           zip: listing.zip,
           id: listing.id,
         };
+
         const buyLi = document.createElement("li");
         buyLi.dataset.id = selectedListing.id;
         buyLi.innerHTML = `
@@ -63,7 +65,7 @@ function renderListings(listing) {
         li.remove();
       });
     });
-    document.querySelector("#lists").append(li);
+    document.querySelector("#lists").append(card);
   }
   
   function fetchListings() {
