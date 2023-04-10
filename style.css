@@ -49,6 +49,6 @@ body {
   button[type="submit"] {
     margin-top: 10px;
   }
-  .btn btn-primary{
+   #delete{
     background-color: red;
   }
