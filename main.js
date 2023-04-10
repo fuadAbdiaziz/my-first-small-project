@@ -1,4 +1,3 @@
-
 function renderListings(listing) {
     const card = document.createElement("div");
     card.classList.add("card");
@@ -14,6 +13,8 @@ function renderListings(listing) {
         </div>
       </div>
     `;
+    card.style.display = "flex"; // Set the display property to flex
+    card.style.flexDirection = "column"; // Set the flex-direction property to column
     card.querySelector("#delete").addEventListener("click", () => {
       card.remove();
       deleteListings()

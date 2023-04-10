@@ -52,8 +52,7 @@ body {
    #delete{
     background-color: red;
   }
-  .card-container {
+  .card-listing {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
   }
