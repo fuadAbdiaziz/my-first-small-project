@@ -28,7 +28,7 @@ function renderListings(listing) {
           <h5 class="card-brand">Type: ${listing.state}</h5>
           <p class="card-text">Available quantity is ${listing.zip}</p>
           <button id="edit" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
-          <button id="buy" class="btn btn-primary">Buy Residence</button>
+          <button id="buy" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i>Buy Residence</button>
         </div>
       `;
       li.querySelector("#edit").addEventListener("click", () => {
