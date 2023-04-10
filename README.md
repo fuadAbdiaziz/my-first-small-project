@@ -20,7 +20,7 @@ Once the program has started, launch a browser and go to http://localhost:3000.
 You'll get a list of all the ads for residences.
 Click the "Add Listing" button and complete the form with the necessary information to add a new listing.
 
-When you wish to modify a listing, click the "Go Somewhere" button and it will give ou more details about the house and you can click the Edit" button next to it and then make your changes in the prices.
+When you wish to modify a listing, click the "Go Somewhere" button and it will give ou more details about the house and you can click the Edit" button next to it and then make your changes in the prices and then you can buy the residence.
 Click the "Delete" button next to the listing you want to remove in order to remove it.
 
 Technologies Used

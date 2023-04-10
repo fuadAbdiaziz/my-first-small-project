@@ -1,80 +1,78 @@
 
-function renderListings(listing){
-   
-    const li=document.createElement("li")
-    
-    
-    li.innerHTML=`
-    <div class="card" style="width: 18rem;">
-  <img src='${listing.image}'class="card-img-top" >
-  <div class="card-body">
-    <h5 class="card-title">'${listing.description}'Card title</h5>
-    <h5 class="card-title">'${listing.price}'Card title</h5>
-    <p class="card-text">'${listing.city}'</p>
-    <button id='button' href="" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i>Go somewhere</button>
-    <button  id='delete' href="" class="btn btn-primary"><i class="fa fa-trash" aria-hidden="true"></i>delete</button>
-    
-  </div>
-</div>
-        
-        
+function renderListings(listing) {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div class="card" style="width: 18rem;">
+        <img src="${listing.image}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">${listing.description}</h5>
+          <h5 class="card-title">Ksh ${listing.price}</h5>
+          <p class="card-text">${listing.city}</p>
+          <button id="button" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i>Go somewhere</button>
+          <button id="delete" class="btn btn-primary"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
+        </div>
+      </div>
     `;
-    li.querySelector('#delete').addEventListener('click', ()=>{li.remove() 
-        deleteListings()
-    })
-    li.addEventListener("click", () => {
-        li.innerHTML = `
-          
-          <div class="card-body"style="width: 18rem;">
-          <img src="${listing.image}" class="card-img-top" alt="${listing.price}">
-            <h5 class="card-title">${listing.description}</h5>
-            <p class="card-text"id="price">Ksh ${listing.price}</p>
-            <p class="card-text">${listing.city}</p>
-            <h5 class="card-brand">Country of origin: ${listing.address}</h5>
-            <h5 class="card-brand">Type: ${listing.state}</h5>
-            <p class="card-text"> Available quantity is ${listing.zip}</p>
-            <button  id='edit' href="" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
-            
-          </div>
-        `
-        document.querySelector('#edit').addEventListener('click',() => {
-            let price=document.querySelector('#price')
-            price.innerHTML=listing.price-=1000
-        })
-      })
-      
-
+    li.querySelector("#delete").addEventListener("click", () => {
+      li.remove();
+      deleteListings()
+    });
+    li.querySelector("#button").addEventListener("click", () => {
+      li.innerHTML = `
+        <div class="card-body" style="width: 18rem;">
+          <img src="${listing.image}" class="card-img-top">
+          <h5 class="card-title">${listing.description}</h5>
+          <p class="card-text">Ksh ${listing.price}</p>
+          <p class="card-text">${listing.city}</p>
+          <h5 class="card-brand">Country of origin: ${listing.address}</h5>
+          <h5 class="card-brand">Type: ${listing.state}</h5>
+          <p class="card-text">Available quantity is ${listing.zip}</p>
+          <button id="edit" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
+          <button id="buy" class="btn btn-primary">Buy Residence</button>
+        </div>
+      `;
+      li.querySelector("#edit").addEventListener("click", () => {
+        listing.price -= 1000;
+        li.querySelector(".card-title").textContent = listing.description;
+        li.querySelector(".card-text").textContent = `Ksh ${listing.price}`;
+      });
+      li.querySelector("#buy").addEventListener("click", () => {
+        const selectedListing = {
+          image: listing.image,
+          description: listing.description,
+          price: listing.price,
+          city: listing.city,
+          address: listing.address,
+          state: listing.state,
+          zip: listing.zip,
+          id: listing.id,
+        };
+        const buyLi = document.createElement("li");
+        buyLi.dataset.id = selectedListing.id;
+        buyLi.innerHTML = `
+          <img src="${selectedListing.image}" alt="${selectedListing.price}">
+          <h3>${selectedListing.description}</h3>
+          <button data-id="${selectedListing.id}" class="remove-btn">Remove from Buy Residence</button>
+        `;
+        buyLi.querySelector(".remove-btn").addEventListener("click", (event) => {
+          const id = event.target.dataset.id;
+          const selectedBuyLi = document.querySelector(`[data-id="${id}"]`);
+          selectedBuyLi.remove();
+        });
+        document.querySelector("#favorites").append(buyLi);
+        li.remove();
+      });
+    });
     document.querySelector("#lists").append(li);
-}
-
-
-function fetchListings(){
-    fetch("http://localhost:3000/listings")
-    .then(response=>response.json())
-    .then(listings => listings.forEach((listing) => {
-        renderListings(listing)
-    }))
-    .catch(error=>console.error(error))
-}
-
-function buyResidence(event){
-    const id=event.target.dataset.id;
-    const selectedListing = document.querySelector(`[data-id='${id}']`).closest('li');
-
-    // Create a new li element with the listing details
-    const favoriteLi = document.createElement('li');
-    favoriteLi.innerHTML = `
-        <img src=${selectedListing.querySelector('img').getAttribute('src')} alt=${selectedListing.querySelector('img').getAttribute('alt')}>
-        <h3>${selectedListing.querySelector('h3').textContent}</h3>
-        <button data-id=${id} class="remove-btn">Remove from Buy Residence</button>
-    `;
-
-    // Add event listener for removing a listing from the favorites list
-    buyLi.querySelector('button').addEventListener('click', buyResidence);
-
-    // Append the li element to the favorites list
-    document.querySelector('#favorites').append(favoriteLi);
-}
+  }
+  
+  function fetchListings() {
+    fetch(" http://localhost:3000/listings")
+      .then((response) => response.json())
+      .then((listings) => listings.forEach(renderListings))
+      .catch((error) => console.error(error));
+  }
+  
 function createListing(listing){
     fetch("http://localhost:3000/listings", {
         method: "POST",
@@ -134,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#lists").addEventListener("click", event => {
         if (event.target.matches("button")) {
             const id = event.target.dataset.id;
-            deleteListing(id);
+            deleteListings(id);
         }
     });
 });
